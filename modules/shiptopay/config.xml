@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<module>
+	<name>shiptopay</name>
+	<displayName>Ship to Pay</displayName>
+	<version>2</version>
+	<description>Module that matches shipment method to payment method</description>
+	<author></author>
+	<tab>Blocks</tab>
+	<is_configurable>1</is_configurable>
+	<need_instance>1</need_instance>
+	<limited_countries></limited_countries>
+</module>

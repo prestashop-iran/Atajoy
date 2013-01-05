@@ -1,0 +1,30 @@
+﻿سلام {firstname} {lastname}، با تشکر از خرید شما از {shop_name}!
+
+جزئیات سفارش
+
+	سفارش: {order_name} در تاریخ {date}
+	پرداخت: {payment}
+
+	محصولات: {total_products}
+	تخفیف‌ها: {total_discounts}
+	حمل: {total_shipping}
+	کادو پیچی: {total_wrapping}
+	جمع پرداخت‌ها: {total_paid}
+    {transaction_id}
+
+حمل
+
+	حامل: {carrier}
+
+	آدرس تحویل:
+
+	{delivery_block_txt}
+
+	آدرس پرداخت وجه:
+
+	{invoice_block_txt}
+
+شما می‌توانید با کلیک برروی "تاریخچه‌ی سفارشات" از حساب کاربری خود در وبسایت ما سفارش خود را بازبینی کنید و یا فاکتور خود را دریافت کنید. 
+اگر شما از حساب میهمان استفاده می کنید می توانید سفارش خود را از این صفحه پیگیری کنید: {shop_url}guest-tracking.php
+
+{shop_url} قدرت گرفته از پرستا شاپ™
