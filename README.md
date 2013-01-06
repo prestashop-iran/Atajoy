@@ -1,4 +1,4 @@
 Atajoy
 ======
 
-Atajoy COD module for prestashop
+Prestashop Module : Atajoy COD for prestashop 1.4
