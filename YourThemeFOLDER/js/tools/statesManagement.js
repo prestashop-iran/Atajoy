@@ -1,4 +1,6 @@
 $(document).ready(function(){
+	$('input[name*="city"]').after('<select name="city" id="city"><option value="0">لطفاً استان را انتخاب کنید</option></select>');
+	$('input[name*="city"]').remove();
 	$('select#id_country').change(function(){
 		updateState();
 		updateNeedIDNumber();
@@ -132,7 +134,7 @@ function hideThirdBox() {
 
 
 function getCity(value) {
-    shahr = document.getElementById('city');
+    var shahr = document.getElementById('city');
     //hideThirdBox();
     shahr.options.length = 0;
 

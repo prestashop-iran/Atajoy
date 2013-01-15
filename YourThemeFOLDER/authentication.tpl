@@ -1,5 +1,5 @@
 {*
-* 2007-2011 PrestaShop
+* 2007-2012 PrestaShop
 *
 * NOTICE OF LICENSE
 *
@@ -18,8 +18,8 @@
 * needs please refer to http://www.prestashop.com for more information.
 *
 *  @author PrestaShop SA <contact@prestashop.com>
-*  @copyright  2007-2011 PrestaShop SA
-*  @version  Release: $Revision: 9376 $
+*  @copyright  2007-2012 PrestaShop SA
+*  @version  Release: $Revision: 16896 $
 *  @license    http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
 *  International Registered Trademark & Property of PrestaShop SA
 *}
@@ -71,11 +71,7 @@ countriesNeedZipCode = new Array();
 	{/foreach}
 {/if}
 $(function(){ldelim}
-	$('.id_state option[value={if isset($smarty.post.id_state)}{$smarty.post.id_state}{else}{if isset($address->id_state)}{$address->id_state|escape:'htmlall':'UTF-8'}{/if}{/if}]').attr('selected', 'selected');
-    //me
-    getCity($('.id_state option[value={if isset($smarty.post.id_state)}{$smarty.post.id_state}{else}{if isset($address->id_state)}{$address->id_state|escape:'htmlall':'UTF-8'}{/if}{/if}]')[0].id);
-   // $('#city').value = '{if isset($smarty.post.city)}{$smarty.post.city}{else}{if isset($address->city)}{$address->city|escape:'htmlall':'UTF-8'}{/if}{/if}';
-
+	$('.id_state option[value={if isset($smarty.post.id_state)}{$smarty.post.id_state|intval}{else}{if isset($address)}{$address->id_state|escape:'htmlall':'UTF-8'}{/if}{/if}]').attr('selected', 'selected');
 {rdelim});
 //]]>
 {if $vat_management}
@@ -109,7 +105,7 @@ $(function(){ldelim}
 			<h4>{l s='Enter your e-mail address to create an account'}.</h4>
 			<p class="text">
 				<label for="email_create">{l s='E-mail address'}</label>
-				<span><input type="text" id="email_create" name="email_create" value="{if isset($smarty.post.email_create)}{$smarty.post.email_create|escape:'htmlall':'UTF-8'|stripslashes}{/if}" class="account_input" /></span>
+				<span><input type="text" id="email_create" name="email_create" value="{if isset($smarty.post.email_create)}{$smarty.post.email_create|stripslashes|escape:'htmlall':'UTF-8'}{/if}" class="account_input" /></span>
 			</p>
 			<p class="submit">
 			{if isset($back)}<input type="hidden" class="hidden" name="back" value="{$back|escape:'htmlall':'UTF-8'}" />{/if}
@@ -123,11 +119,11 @@ $(function(){ldelim}
 			<h3>{l s='Already registered ?'}</h3>
 			<p class="text">
 				<label for="email">{l s='E-mail address'}</label>
-				<span><input type="text" id="email" name="email" value="{if isset($smarty.post.email)}{$smarty.post.email|escape:'htmlall':'UTF-8'|stripslashes}{/if}" class="account_input" /></span>
+				<span><input type="text" id="email" name="email" value="{if isset($smarty.post.email)}{$smarty.post.email|stripslashes|escape:'htmlall':'UTF-8'}{/if}" class="account_input" /></span>
 			</p>
 			<p class="text">
 				<label for="passwd">{l s='Password'}</label>
-				<span><input type="password" id="passwd" name="passwd" value="{if isset($smarty.post.passwd)}{$smarty.post.passwd|escape:'htmlall':'UTF-8'|stripslashes}{/if}" class="account_input" /></span>
+				<span><input type="password" id="passwd" name="passwd" value="{if isset($smarty.post.passwd)}{$smarty.post.passwd|stripslashes|escape:'htmlall':'UTF-8'}{/if}" class="account_input" /></span>
 			</p>
 			<p class="submit">
 				{if isset($back)}<input type="hidden" class="hidden" name="back" value="{$back|escape:'htmlall':'UTF-8'}" />{/if}
@@ -154,15 +150,15 @@ $(function(){ldelim}
 						<input type="radio" name="id_gender" id="id_gender2" value="2" {if isset($smarty.post.id_gender) && $smarty.post.id_gender == '2'}checked="checked"{/if}>
 						<label for="id_gender2" class="top">{l s='Ms.'}</label>
 					</p>
-										<p class="required text">
+					<p class="required text">
 						<label for="firstname">{l s='First name'}</label>
-						<input type="text" class="text" id="firstname" name="firstname" onblur="$('#customer_firstname').val($(this).val());" value="{if isset($smarty.post.firstname)}{$smarty.post.firstname}{/if}">
+						<input type="text" class="text" id="firstname" name="firstname" onchange="$('#customer_firstname').val($(this).val());" value="{if isset($smarty.post.firstname)}{$smarty.post.firstname}{/if}">
 						<input type="hidden" class="text" id="customer_firstname" name="customer_firstname" value="{if isset($smarty.post.firstname)}{$smarty.post.firstname}{/if}">
 						<sup>*</sup>
 					</p>
 					<p class="required text">
 						<label for="lastname">{l s='Last name'}</label>
-						<input type="text" class="text" id="lastname" name="lastname" onblur="$('#customer_lastname').val($(this).val());" value="{if isset($smarty.post.lastname)}{$smarty.post.lastname}{/if}">
+						<input type="text" class="text" id="lastname" name="lastname" onchange="$('#customer_lastname').val($(this).val());" value="{if isset($smarty.post.lastname)}{$smarty.post.lastname}{/if}">
 						<input type="hidden" class="text" id="customer_lastname" name="customer_lastname" value="{if isset($smarty.post.lastname)}{$smarty.post.lastname}{/if}">
 						<sup>*</sup>
 					</p>
@@ -240,9 +236,7 @@ $(function(){ldelim}
 						{elseif $field_name eq "city"}
 						<p class="required text">
 							<label for="city">{l s='City'}</label>
-							<select name="city" id="city" >
-                                <option value="">-</option>
-                            </select>
+							<input type="text" class="text" name="city" id="city" value="{if isset($smarty.post.city)}{$smarty.post.city}{/if}">
 							<sup>*</sup>
 						</p>
 							<!--
@@ -435,9 +429,7 @@ $(function(){ldelim}
 			{elseif $field_name eq "city"}
 				<p class="required text">
 					<label for="city">{l s='City'}</label>
-					<select name="city" id="city" >
-                        <option value="">-</option>
-                    </select>
+					<input type="text" class="text" name="city" id="city" value="{if isset($smarty.post.city)}{$smarty.post.city}{/if}" />
 					<sup>*</sup>
 				</p>
 				<!--
@@ -515,4 +507,3 @@ $(function(){ldelim}
 
 </form>
 {/if}
-

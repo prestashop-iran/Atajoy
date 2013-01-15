@@ -157,12 +157,10 @@ class Shiptopay extends Module
 		WHERE k.`position` = 1 AND k.id_hook=1');
 		
 		foreach ($paymenty as $paymod){
-			require_once _PS_MODULE_DIR_.'/'.$paymod['pay_name'].'/'.$paymod['pay_name'].'.php';
-			$moduleList[$paymod['pay_name']] = new $paymod['pay_name'];
+			if (@include_once _PS_MODULE_DIR_.'/'.$paymod['pay_name'].'/'.$paymod['pay_name'].'.php')
+				$moduleList[$paymod['pay_name']] = new $paymod['pay_name'];
 		}
 		return $moduleList;
 	}
 
 }
-
-?>

@@ -51,7 +51,7 @@
 				<div class="opc_float">
 					<h4>{l s='Instant Checkout'}</h4>
 					<p>
-						<input type="button" class="exclusive_large" id="opc_guestCheckout" value="{l s='Checkout as guest'}" />
+						<input type="button" class="exclusive_large" id="opc_guestCheckout" value="{l s='Guest checkout'}" />
 					</p>
 				</div>
 
@@ -241,9 +241,7 @@
 				{elseif $field_name eq "city"}
 				<p class="required text">
 					<label for="city">{l s='City'}</label>
-					<select name="city" id="city" >
-                        <option value="">-</option>
-                    </select>
+					<input type="text" class="text" name="city" id="city" value="{if isset($guestInformations) && $guestInformations.city}{$guestInformations.city}{/if}" />
 					<sup>*</sup>
 				</p>
 				{elseif $field_name eq "country" || $field_name eq "Country:name"}
@@ -306,7 +304,7 @@
 
 				<p class="checkbox is_customer_param">
 					<input type="checkbox" name="invoice_address" id="invoice_address" />
-					<label for="invoice_address"><b>{l s='Please use another address for invoice'}</b></label>
+					<label for="invoice_address"><b>{l s='Use another address for invoice'}</b></label>
 				</p>
 			
 				<div id="opc_invoice_address" class="is_customer_param">
@@ -427,4 +425,3 @@
 	</form>
 	<div class="clear"></div>
 </div>
-

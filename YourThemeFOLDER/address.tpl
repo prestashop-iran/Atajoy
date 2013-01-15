@@ -1,5 +1,5 @@
 {*
-* 2007-2011 PrestaShop
+* 2007-2012 PrestaShop
 *
 * NOTICE OF LICENSE
 *
@@ -18,8 +18,8 @@
 * needs please refer to http://www.prestashop.com for more information.
 *
 *  @author PrestaShop SA <contact@prestashop.com>
-*  @copyright  2007-2011 PrestaShop SA
-*  @version  Release: $Revision: 8673 $
+*  @copyright  2007-2012 PrestaShop SA
+*  @version  Release: $Revision: 14008 $
 *  @license    http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
 *  International Registered Trademark & Property of PrestaShop SA
 *}
@@ -74,10 +74,6 @@ countriesNeedZipCode = new Array();
 {/foreach}
 $(function(){ldelim}
 	$('.id_state option[value={if isset($smarty.post.id_state)}{$smarty.post.id_state}{else}{if isset($address->id_state)}{$address->id_state|escape:'htmlall':'UTF-8'}{/if}{/if}]').attr('selected', 'selected');
-    //me
-    getCity($('.id_state option[value={if isset($smarty.post.id_state)}{$smarty.post.id_state}{else}{if isset($address->id_state)}{$address->id_state|escape:'htmlall':'UTF-8'}{/if}{/if}]')[0].id);
-   // $('#city').value = '{if isset($smarty.post.city)}{$smarty.post.city}{else}{if isset($address->city)}{$address->city|escape:'htmlall':'UTF-8'}{/if}{/if}';
-
 {rdelim});
 {if $vat_management}
 {literal}
@@ -187,15 +183,13 @@ $(function(){ldelim}
 		{if $field_name eq 'city'}
 		<p class="required text">
 			<label for="city">{l s='City'}</label>
-			<select name="city" id="city" >
-                <option value="">-</option>
-            </select>
+			<input type="text" name="city" id="city" value="{if isset($smarty.post.city)}{$smarty.post.city}{else}{if isset($address->city)}{$address->city|escape:'htmlall':'UTF-8'}{/if}{/if}" maxlength="64" />
 			<sup>*</sup>
 		</p>
 		<!-- If the merchant has not updated his layout address, country has to be verified - however it's deprecated -->
 		{/if}
 		{if $field_name eq 'Country:name' || $field_name eq 'country'}
-		<p class="required select" style="display:none;">
+		<p class="required select">
 			<label for="id_country">{l s='Country'}</label>
 			<select id="id_country" name="id_country">{$countries_list}</select>
 			<sup>*</sup>
@@ -279,4 +273,3 @@ $(function(){ldelim}
 	</p>
 	<p class="required"><sup>*</sup>{l s='Required field'}</p>
 </form>
-
